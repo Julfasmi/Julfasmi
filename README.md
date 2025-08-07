@@ -1,7 +1,4 @@
-# 👋 Hi, I'm Julfasmi Hi. M. Nasir
-
-🎯 **Data Scientist | Python Developer | Analytics & Automation Enthusiast**  
-📍 Indonesia | 🌐 Transforming Data into Business Insights
+![Julfasmi](images/github-header-banner.png)
 
 ---
 
