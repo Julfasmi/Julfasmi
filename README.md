@@ -42,7 +42,7 @@ I'm constantly exploring the intersection of **code, insight, and impact** — t
 
 ⭐ *Thanks for visiting! Feel free to explore my repositories and connect if you find something interesting or useful.*
 
----
+<!-- ---
 
 ## 🕹️ Let's Play
 
@@ -55,4 +55,4 @@ I'm constantly exploring the intersection of **code, insight, and impact** — t
 
 <br clear="both">
 
-<img src="https://raw.githubusercontent.com/maurodesouza/maurodesouza/output/snake.svg" alt="Snake animation" />
+<img src="https://raw.githubusercontent.com/maurodesouza/maurodesouza/output/snake.svg" alt="Snake animation" /> -->
