@@ -28,31 +28,14 @@ I'm constantly exploring the intersection of **code, insight, and impact** — t
 - Supervised & Unsupervised ML, ARIMA/SARIMA, Deep Learning (CNN, LSTM), Clustering, Forecasting
 
 ### ☁️ Deployment & Dev Tools
-- Git & GitHub, Render, Railway, Hugging Face Spaces, Streamlit, FastAPI
-
----
-
-## 📂 Highlight Projects
-
-- 🧠 **Emotion Detection from Images**  
-  Built and trained a CNN model to classify human facial emotions from image input.
-
-- 🕵️ **Real-time Object Detection with YOLOv8**  
-  Developed a real-time screen-based object detection app using YOLOv8, OpenCV, and FastAPI.
-
-- 📈 **Gold Price Forecasting (ARIMA & SARIMA)**  
-  Conducted time series forecasting using ARIMA/SARIMA models for price prediction and business insight.
-
-- 📊 **Excel Automation for Monthly Reports**  
-  Automated complex Excel reports using Python & VBA, significantly reducing manual workload.
+- Git & GitHub, Railway, FastAPI
 
 ---
 
 ## 📫 Let's Connect
 
-- 🔗 [LinkedIn](https://www.linkedin.com/in/julfasmihmnasir)  
-- 🐙 [GitHub](https://github.com/JulfasmiNasir)  
-- 📧 Email: julfasmi.nasir@gmail.com  
+- 🔗 [LinkedIn](https://www.linkedin.com/in/julfasmihmnasir)    
+- 📧 Email: julfasmi.19@gmail.com  
 
 ---
 
