@@ -43,16 +43,17 @@ I'm constantly exploring the intersection of **code, insight, and impact** — t
 ⭐ *Thanks for visiting! Feel free to explore my repositories and connect if you find something interesting or useful.*
 
 
-
-## 🕹️ Let's Play
 <!-- ---
+## 🕹️ Let's Play
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/maurodesouza/maurodesouza/output/pacman-contribution-graph-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/maurodesouza/maurodesouza/output/pacman-contribution-graph.svg">
   <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/maurodesouza/maurodesouza/output/pacman-contribution-graph.svg">
 </picture>
--->
+
 
 <br clear="both">
 
 <img src="https://raw.githubusercontent.com/maurodesouza/maurodesouza/output/snake.svg" alt="Snake animation" /> 
+-->
