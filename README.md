@@ -42,7 +42,6 @@ I'm constantly exploring the intersection of **code, insight, and impact** — t
 
 ⭐ *Thanks for visiting! Feel free to explore my repositories and connect if you find something interesting or useful.*
 
-<!-- ---
 
 ## 🕹️ Let's Play
 
