@@ -7,7 +7,7 @@
 
 ## 🚀 About Me
 
-Hello! I'm **Julfasmi**, a data professional with a strong foundation in **Statistics** and over **2 years of hands-on experience** solving real-world data problems.
+Hello! I'm **Julfasmi**, a data professional with a strong foundation in **Statistics** and over **3 years of hands-on experience** solving real-world data problems.
 
 I specialize in **data analysis, machine learning, and data automation**, with experience delivering **end-to-end data solutions** — from data collection and preprocessing to modeling, visualization, and insight delivery.
 
