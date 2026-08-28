@@ -1,6 +1,6 @@
 # 👋 Hi, I'm Julfasmi Hi. M. Nasir
 
-🎯 **Data Scientist | Data Analyst | Analytics & Automation Enthusiast**  
+🎯 **Data Scientist | Data Analyst | Analytics & Automation Enthusiast**
 📍 Indonesia | 🌐 Turning Data into Actionable Business Insights
 
 ---
@@ -18,67 +18,69 @@ I enjoy working at the intersection of **data, code, and decision-making**, help
 ## 🛠️ Tech Stack & Tools
 
 ### 💻 Programming & Scripting
-- Python, R, SQL, Excel (VBA)
+
+* Python, R, SQL, Excel (VBA)
 
 ### 📦 Libraries & Frameworks
-- Pandas, NumPy, Scikit-learn, TensorFlow  
-- OpenCV, YOLO  
-- FastAPI, Flask
+
+* Pandas, NumPy, Scikit-learn, TensorFlow
+* OpenCV, YOLO
+* FastAPI, Flask
 
 ### 📊 Data Analytics & Visualization
-- Power BI, Tableau, Looker Studio (Google Data Studio)  
-- Matplotlib, Seaborn  
-- SPSS, Minitab
+
+* Power BI, Tableau, Looker Studio
+* Matplotlib, Seaborn
+* SPSS, Minitab
 
 ### 🧠 Machine Learning & Modeling
-- Supervised & Unsupervised Learning  
-- Time Series Analysis (ARIMA / SARIMA)  
-- Deep Learning (CNN, LSTM)  
-- Clustering & Forecasting
+
+* Supervised & Unsupervised Learning
+* Time Series Analysis (ARIMA / SARIMA)
+* Deep Learning (CNN, LSTM)
+* Clustering & Forecasting
 
 ### ☁️ Deployment & Dev Tools
-- Git & GitHub  
-- FastAPI  
-- Railway
+
+* Git & GitHub
+* FastAPI
+* Railway
 
 ---
 
 ## 📌 What I’m Interested In
-- Data Analytics & Business Intelligence  
-- Machine Learning Applications  
-- Data Automation & Workflow Optimization  
-- Data Storytelling & Visualization
+
+* Data Analytics & Business Intelligence
+* Machine Learning Applications
+* Data Automation & Workflow Optimization
+* Data Storytelling & Visualization
 
 ---
 
 ## 📫 Let’s Connect
 
-- 🔗 **LinkedIn**: [linkedin.com/in/julfasmihmnasir](https://www.linkedin.com/in/julfasmihmnasir)  
-- 📧 **Email**: julfasmi.19@gmail.com  
+* 🔗 **LinkedIn**: [linkedin.com/in/julfasmihmnasir](https://www.linkedin.com/in/julfasmihmnasir)
+* 📧 **Email**: [julfasmi.19@gmail.com](mailto:julfasmi.19@gmail.com)
 
 ---
 
-⭐ *Thanks for visiting my GitHub!  
-Feel free to explore my repositories, and let’s connect if you’re interested in collaboration or data-driven projects.*
+⭐ *Thanks for visiting my GitHub!*
+
+Feel free to explore my repositories, and let’s connect if you’re interested in collaboration or data-driven projects.
 
 ---
 
 <div align="center">
 
-## 🐍 Contribution Snake
+## 🎨 Contribution Animation
 
 <img
-  src="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/snake.svg"
-  alt="GitHub Contribution Snake"
+src="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/contribution-animation.svg"
+alt="GitHub Contribution Animation"
 />
 
-<br>
-
-## 👾 Contribution Pac-Man
-
-<img
-  src="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/pacman-contribution-graph.svg"
-  alt="Pac-Man Contribution Graph"
-/>
+<p>
+  <i>Automatically updated every 4 hours with alternating Snake and Pac-Man animations.</i>
+</p>
 
 </div>
