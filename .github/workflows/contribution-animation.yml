@@ -1,48 +1,103 @@
-name: Generate Contribution Animation
+name: Contribution Animation
 
 on:
   schedule:
-    # Run every 4 hours
-    - cron: "0 */4 * * *"
+    # Schedule uses UTC
+    # WIB = UTC + 7
+
+    # 06:00 WIB  -> 23:00 UTC
+    - cron: "0 23 * * *"
+
+    # 08:30 WIB -> 01:30 UTC
+    - cron: "30 1 * * *"
+
+    # 11:00 WIB -> 04:00 UTC
+    - cron: "0 4 * * *"
+
+    # 13:30 WIB -> 06:30 UTC
+    - cron: "30 6 * * *"
+
+    # 16:00 WIB -> 09:00 UTC
+    - cron: "0 9 * * *"
+
+    # 18:30 WIB -> 11:30 UTC
+    - cron: "30 11 * * *"
+
+    # 21:00 WIB -> 14:00 UTC
+    - cron: "0 14 * * *"
 
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   generate:
-    permissions:
-      contents: write
-
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
 
     steps:
-      # Determine which animation should be generated
-      - name: Determine animation
-        id: animation
-        shell: bash
-        run: |
-          HOUR=$(date -u +%H)
-          HOUR=$((10#$HOUR))
-
-          # Alternating schedule:
-          # 00, 08, 16 UTC -> Snake
-          # 04, 12, 20 UTC -> Pac-Man
-
-          if (( HOUR % 8 == 0 )); then
-            echo "type=snake" >> "$GITHUB_OUTPUT"
-            echo "Generating Snake animation..."
-          else
-            echo "type=pacman" >> "$GITHUB_OUTPUT"
-            echo "Generating Pac-Man animation..."
-          fi
-
-      # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Generate Snake animation
+      # --------------------------------------------------
+      # Determine animation based on Asia/Jakarta time
+      # --------------------------------------------------
+
+      - name: Determine current animation
+        id: animation
+        shell: bash
+        run: |
+          HOUR=$(TZ=Asia/Jakarta date +%H)
+          MINUTE=$(TZ=Asia/Jakarta date +%M)
+
+          TIME=$((10#$HOUR * 60 + 10#$MINUTE))
+
+          echo "Current WIB time: ${HOUR}:${MINUTE}"
+          echo "Minutes since midnight: ${TIME}"
+
+          if (( TIME >= 360 && TIME < 510 )); then
+            TYPE="snake"
+
+          elif (( TIME >= 510 && TIME < 660 )); then
+            TYPE="pacman"
+
+          elif (( TIME >= 660 && TIME < 810 )); then
+            TYPE="galaxy"
+
+          elif (( TIME >= 810 && TIME < 960 )); then
+            TYPE="matrix"
+
+          elif (( TIME >= 960 && TIME < 1110 )); then
+            TYPE="data"
+
+          elif (( TIME >= 1110 && TIME < 1260 )); then
+            TYPE="particle"
+
+          else
+            TYPE="sleeping-cat"
+          fi
+
+          echo "type=$TYPE" >> "$GITHUB_OUTPUT"
+          echo "Selected animation: $TYPE"
+
+      # --------------------------------------------------
+      # Prepare output directory
+      # --------------------------------------------------
+
+      - name: Prepare output directory
+        shell: bash
+        run: |
+          rm -rf dist
+          mkdir -p dist
+
+      # --------------------------------------------------
+      # SNAKE
+      # 06:00 - 08:30 WIB
+      # --------------------------------------------------
+
       - name: Generate Snake animation
         if: steps.animation.outputs.type == 'snake'
         uses: Platane/snk/svg-only@v3
@@ -51,29 +106,501 @@ jobs:
           outputs: |
             dist/snake.svg?palette=github-dark
 
-      # Rename Snake to the common filename
-      - name: Prepare Snake animation
+      - name: Prepare Snake
         if: steps.animation.outputs.type == 'snake'
         shell: bash
         run: |
           cp dist/snake.svg dist/contribution-animation.svg
 
-      # Generate Pac-Man animation
+      # --------------------------------------------------
+      # PAC-MAN
+      # 08:30 - 11:00 WIB
+      # --------------------------------------------------
+
       - name: Generate Pac-Man animation
         if: steps.animation.outputs.type == 'pacman'
         uses: abozanona/pacman-contribution-graph@main
         with:
           github_user_name: ${{ github.repository_owner }}
 
-      # Rename Pac-Man to the common filename
-      - name: Prepare Pac-Man animation
+      - name: Prepare Pac-Man
         if: steps.animation.outputs.type == 'pacman'
         shell: bash
         run: |
           cp dist/pacman-contribution-graph.svg dist/contribution-animation.svg
 
-      # Push result to output branch
-      - name: Push animation to output branch
+      # --------------------------------------------------
+      # GALAXY
+      # 11:00 - 13:30 WIB
+      # --------------------------------------------------
+
+      - name: Generate Galaxy animation
+        if: steps.animation.outputs.type == 'galaxy'
+        shell: bash
+        run: |
+          cat > dist/contribution-animation.svg <<'EOF'
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 900 300"
+               width="900"
+               height="300">
+
+            <rect width="900" height="300" fill="#0d1117"/>
+
+            <defs>
+              <radialGradient id="glow">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#58a6ff" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <text x="450" y="42"
+                  text-anchor="middle"
+                  fill="#8b949e"
+                  font-family="Arial, sans-serif"
+                  font-size="18">
+              CONTRIBUTION GALAXY
+            </text>
+
+            <g transform="translate(450 155)">
+              <circle r="45" fill="url(#glow)">
+                <animate attributeName="r"
+                         values="35;55;35"
+                         dur="3s"
+                         repeatCount="indefinite"/>
+              </circle>
+
+              <circle r="10" fill="#ffffff"/>
+
+              <g fill="#58a6ff">
+                <circle cx="90" cy="0" r="4"/>
+                <circle cx="-120" cy="20" r="3"/>
+                <circle cx="35" cy="-90" r="3"/>
+                <circle cx="-45" cy="85" r="4"/>
+                <circle cx="130" cy="70" r="3"/>
+                <circle cx="-150" cy="-65" r="3"/>
+                <circle cx="180" cy="-25" r="4"/>
+                <circle cx="-190" cy="55" r="3"/>
+              </g>
+
+              <ellipse rx="210" ry="75"
+                       fill="none"
+                       stroke="#30363d"
+                       stroke-width="1"/>
+
+              <ellipse rx="150" ry="110"
+                       fill="none"
+                       stroke="#21262d"
+                       stroke-width="1"/>
+
+              <g>
+                <circle cx="210" cy="0" r="5" fill="#79c0ff">
+                  <animateTransform
+                    attributeName="transform"
+                    type="rotate"
+                    from="0"
+                    to="360"
+                    dur="8s"
+                    repeatCount="indefinite"/>
+                </circle>
+              </g>
+            </g>
+          </svg>
+          EOF
+
+      # --------------------------------------------------
+      # MATRIX
+      # 13:30 - 16:00 WIB
+      # --------------------------------------------------
+
+      - name: Generate Matrix animation
+        if: steps.animation.outputs.type == 'matrix'
+        shell: bash
+        run: |
+          cat > dist/contribution-animation.svg <<'EOF'
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 900 300"
+               width="900"
+               height="300">
+
+            <rect width="900" height="300" fill="#000000"/>
+
+            <text x="450" y="38"
+                  text-anchor="middle"
+                  fill="#00ff66"
+                  font-family="monospace"
+                  font-size="18">
+              CONTRIBUTION MATRIX
+            </text>
+
+            <g fill="#00ff66"
+               font-family="monospace"
+               font-size="15"
+               opacity="0.9">
+
+              <text x="30" y="-20">
+                101101
+                <animate attributeName="y"
+                         from="-20" to="320"
+                         dur="4s"
+                         repeatCount="indefinite"/>
+              </text>
+
+              <text x="110" y="-80">
+                010110
+                <animate attributeName="y"
+                         from="-80" to="320"
+                         dur="5s"
+                         repeatCount="indefinite"/>
+              </text>
+
+              <text x="200" y="-40">
+                110011
+                <animate attributeName="y"
+                         from="-40" to="320"
+                         dur="3.5s"
+                         repeatCount="indefinite"/>
+              </text>
+
+              <text x="300" y="-100">
+                001101
+                <animate attributeName="y"
+                         from="-100" to="320"
+                         dur="4.5s"
+                         repeatCount="indefinite"/>
+              </text>
+
+              <text x="400" y="-30">
+                101010
+                <animate attributeName="y"
+                         from="-30" to="320"
+                         dur="3.8s"
+                         repeatCount="indefinite"/>
+              </text>
+
+              <text x="500" y="-90">
+                011001
+                <animate attributeName="y"
+                         from="-90" to="320"
+                         dur="5.2s"
+                         repeatCount="indefinite"/>
+              </text>
+
+              <text x="600" y="-50">
+                110101
+                <animate attributeName="y"
+                         from="-50" to="320"
+                         dur="4.2s"
+                         repeatCount="indefinite"/>
+              </text>
+
+              <text x="700" y="-120">
+                010101
+                <animate attributeName="y"
+                         from="-120" to="320"
+                         dur="3.6s"
+                         repeatCount="indefinite"/>
+              </text>
+
+              <text x="800" y="-70">
+                101001
+                <animate attributeName="y"
+                         from="-70" to="320"
+                         dur="4.8s"
+                         repeatCount="indefinite"/>
+              </text>
+
+            </g>
+          </svg>
+          EOF
+
+      # --------------------------------------------------
+      # DATA VISUALIZATION
+      # 16:00 - 18:30 WIB
+      # --------------------------------------------------
+
+      - name: Generate Data Visualization animation
+        if: steps.animation.outputs.type == 'data'
+        shell: bash
+        run: |
+          cat > dist/contribution-animation.svg <<'EOF'
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 900 300"
+               width="900"
+               height="300">
+
+            <rect width="900" height="300" fill="#0d1117"/>
+
+            <text x="450" y="40"
+                  text-anchor="middle"
+                  fill="#8b949e"
+                  font-family="Arial, sans-serif"
+                  font-size="18">
+              CONTRIBUTION ANALYTICS
+            </text>
+
+            <g stroke="#30363d" stroke-width="1">
+              <line x1="100" y1="80" x2="100" y2="250"/>
+              <line x1="100" y1="250" x2="820" y2="250"/>
+              <line x1="100" y1="165" x2="820" y2="165"/>
+              <line x1="100" y1="80" x2="820" y2="80"/>
+            </g>
+
+            <polyline
+              points="100,220 180,190 260,205 340,130 420,160 500,105 580,125 660,85 740,110 820,70"
+              fill="none"
+              stroke="#58a6ff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+
+              <animate
+                attributeName="stroke-dasharray"
+                from="0,1000"
+                to="1000,0"
+                dur="3s"
+                repeatCount="indefinite"/>
+            </polyline>
+
+            <g fill="#58a6ff">
+              <circle cx="100" cy="220" r="5"/>
+              <circle cx="180" cy="190" r="5"/>
+              <circle cx="260" cy="205" r="5"/>
+              <circle cx="340" cy="130" r="5"/>
+              <circle cx="420" cy="160" r="5"/>
+              <circle cx="500" cy="105" r="5"/>
+              <circle cx="580" cy="125" r="5"/>
+              <circle cx="660" cy="85" r="5"/>
+              <circle cx="740" cy="110" r="5"/>
+              <circle cx="820" cy="70" r="5"/>
+            </g>
+
+          </svg>
+          EOF
+
+      # --------------------------------------------------
+      # PARTICLE
+      # 18:30 - 21:00 WIB
+      # --------------------------------------------------
+
+      - name: Generate Particle animation
+        if: steps.animation.outputs.type == 'particle'
+        shell: bash
+        run: |
+          cat > dist/contribution-animation.svg <<'EOF'
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 900 300"
+               width="900"
+               height="300">
+
+            <rect width="900" height="300" fill="#0d1117"/>
+
+            <text x="450" y="42"
+                  text-anchor="middle"
+                  fill="#8b949e"
+                  font-family="Arial, sans-serif"
+                  font-size="18">
+              CONTRIBUTION PARTICLES
+            </text>
+
+            <g fill="#58a6ff">
+
+              <circle cx="150" cy="130" r="5">
+                <animate attributeName="cy"
+                         values="130;110;130"
+                         dur="3s"
+                         repeatCount="indefinite"/>
+              </circle>
+
+              <circle cx="250" cy="190" r="4">
+                <animate attributeName="cy"
+                         values="190;160;190"
+                         dur="2.5s"
+                         repeatCount="indefinite"/>
+              </circle>
+
+              <circle cx="350" cy="100" r="6">
+                <animate attributeName="cy"
+                         values="100;125;100"
+                         dur="3.5s"
+                         repeatCount="indefinite"/>
+              </circle>
+
+              <circle cx="470" cy="175" r="5">
+                <animate attributeName="cy"
+                         values="175;145;175"
+                         dur="2.8s"
+                         repeatCount="indefinite"/>
+              </circle>
+
+              <circle cx="590" cy="115" r="4">
+                <animate attributeName="cy"
+                         values="115;140;115"
+                         dur="3.2s"
+                         repeatCount="indefinite"/>
+              </circle>
+
+              <circle cx="700" cy="180" r="6">
+                <animate attributeName="cy"
+                         values="180;150;180"
+                         dur="2.7s"
+                         repeatCount="indefinite"/>
+              </circle>
+
+            </g>
+
+            <g stroke="#30363d" stroke-width="1">
+              <line x1="150" y1="130" x2="350" y2="100"/>
+              <line x1="350" y1="100" x2="590" y2="115"/>
+              <line x1="250" y1="190" x2="470" y2="175"/>
+              <line x1="470" y1="175" x2="700" y2="180"/>
+            </g>
+
+          </svg>
+          EOF
+
+      # --------------------------------------------------
+      # SLEEPING CAT
+      # 21:00 - 06:00 WIB
+      # --------------------------------------------------
+
+      - name: Generate Sleeping Cat animation
+        if: steps.animation.outputs.type == 'sleeping-cat'
+        shell: bash
+        run: |
+          cat > dist/contribution-animation.svg <<'EOF'
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 900 300"
+               width="900"
+               height="300">
+
+            <rect width="900" height="300" fill="#0d1117"/>
+
+            <text x="450" y="48"
+                  text-anchor="middle"
+                  fill="#8b949e"
+                  font-family="Arial, sans-serif"
+                  font-size="18">
+              GOOD NIGHT
+            </text>
+
+            <g transform="translate(450 165)">
+
+              <!-- tail -->
+              <path d="M80 55
+                       C150 90 170 20 125 -5"
+                    fill="none"
+                    stroke="#c9d1d9"
+                    stroke-width="12"
+                    stroke-linecap="round"/>
+
+              <!-- body -->
+              <ellipse cx="0"
+                       cy="45"
+                       rx="105"
+                       ry="58"
+                       fill="#c9d1d9"/>
+
+              <!-- head -->
+              <path d="M-85 20
+                       L-110 -45
+                       L-55 -15
+                       Q0 -55 55 -15
+                       L110 -45
+                       L85 20
+                       Q80 80 0 80
+                       Q-80 80 -85 20Z"
+                    fill="#c9d1d9"/>
+
+              <!-- ears -->
+              <path d="M-105 -42 L-110 -80 L-70 -55Z"
+                    fill="#c9d1d9"/>
+
+              <path d="M105 -42 L110 -80 L70 -55Z"
+                    fill="#c9d1d9"/>
+
+              <!-- sleeping eyes -->
+              <path d="M-55 15 Q-40 25 -25 15"
+                    fill="none"
+                    stroke="#0d1117"
+                    stroke-width="5"
+                    stroke-linecap="round"/>
+
+              <path d="M25 15 Q40 25 55 15"
+                    fill="none"
+                    stroke="#0d1117"
+                    stroke-width="5"
+                    stroke-linecap="round"/>
+
+              <!-- nose -->
+              <path d="M-7 32 L7 32 L0 40Z"
+                    fill="#0d1117"/>
+
+              <!-- breathing -->
+              <animateTransform
+                attributeName="transform"
+                type="translate"
+                values="450 165;450 160;450 165"
+                dur="4s"
+                repeatCount="indefinite"/>
+
+            </g>
+
+            <!-- Zzz -->
+            <g fill="#58a6ff"
+               font-family="Arial, sans-serif"
+               font-weight="bold">
+
+              <text x="570" y="110" font-size="22">
+                Z
+                <animate attributeName="opacity"
+                         values="0;1;0"
+                         dur="3s"
+                         repeatCount="indefinite"/>
+              </text>
+
+              <text x="610" y="75" font-size="28">
+                Z
+                <animate attributeName="opacity"
+                         values="0;1;0"
+                         dur="3s"
+                         begin="1s"
+                         repeatCount="indefinite"/>
+              </text>
+
+              <text x="660" y="35" font-size="34">
+                Z
+                <animate attributeName="opacity"
+                         values="0;1;0"
+                         dur="3s"
+                         begin="2s"
+                         repeatCount="indefinite"/>
+              </text>
+
+            </g>
+
+          </svg>
+          EOF
+
+      # --------------------------------------------------
+      # Validate output
+      # --------------------------------------------------
+
+      - name: Validate generated animation
+        shell: bash
+        run: |
+          if [ ! -f dist/contribution-animation.svg ]; then
+            echo "ERROR: contribution-animation.svg was not generated."
+            exit 1
+          fi
+
+          echo "Generated animation:"
+          ls -lh dist/contribution-animation.svg
+
+      # --------------------------------------------------
+      # Publish to output branch
+      # --------------------------------------------------
+
+      - name: Publish animation
         uses: crazy-max/ghaction-github-pages@v5
         with:
           target_branch: output
