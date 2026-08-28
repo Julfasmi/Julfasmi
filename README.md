@@ -63,19 +63,8 @@ Feel free to explore my repositories, and let’s connect if you’re interested
 
 ---
 
-<picture>
-  <source
-    media="(prefers-color-scheme: dark)"
-    srcset="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/github-snake-dark.svg"
-  />
+<div align="center">
 
-  <source
-    media="(prefers-color-scheme: light)"
-    srcset="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/github-snake.svg"
-  />
+<img src="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/snake.svg" alt="GitHub Contribution Snake">
 
-  <img
-    alt="GitHub Contribution Snake"
-    src="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/github-snake.svg"
-  />
-</picture>
+</div>
