@@ -79,8 +79,4 @@ src="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/contribution-ani
 alt="GitHub Contribution Animation"
 />
 
-<p>
-  <i>Automatically updated every 4 hours with alternating Snake and Pac-Man animations.</i>
-</p>
-
 </div>
