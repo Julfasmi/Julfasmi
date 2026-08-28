@@ -1,0 +1,82 @@
+name: Generate Contribution Animation
+
+on:
+  schedule:
+    # Run every 4 hours
+    - cron: "0 */4 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  generate:
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      # Determine which animation should be generated
+      - name: Determine animation
+        id: animation
+        shell: bash
+        run: |
+          HOUR=$(date -u +%H)
+          HOUR=$((10#$HOUR))
+
+          # Alternating schedule:
+          # 00, 08, 16 UTC -> Snake
+          # 04, 12, 20 UTC -> Pac-Man
+
+          if (( HOUR % 8 == 0 )); then
+            echo "type=snake" >> "$GITHUB_OUTPUT"
+            echo "Generating Snake animation..."
+          else
+            echo "type=pacman" >> "$GITHUB_OUTPUT"
+            echo "Generating Pac-Man animation..."
+          fi
+
+      # Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Generate Snake animation
+      - name: Generate Snake animation
+        if: steps.animation.outputs.type == 'snake'
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake.svg?palette=github-dark
+
+      # Rename Snake to the common filename
+      - name: Prepare Snake animation
+        if: steps.animation.outputs.type == 'snake'
+        shell: bash
+        run: |
+          cp dist/snake.svg dist/contribution-animation.svg
+
+      # Generate Pac-Man animation
+      - name: Generate Pac-Man animation
+        if: steps.animation.outputs.type == 'pacman'
+        uses: abozanona/pacman-contribution-graph@main
+        with:
+          github_user_name: ${{ github.repository_owner }}
+
+      # Rename Pac-Man to the common filename
+      - name: Prepare Pac-Man animation
+        if: steps.animation.outputs.type == 'pacman'
+        shell: bash
+        run: |
+          cp dist/pacman-contribution-graph.svg dist/contribution-animation.svg
+
+      # Push result to output branch
+      - name: Push animation to output branch
+        uses: crazy-max/ghaction-github-pages@v5
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
