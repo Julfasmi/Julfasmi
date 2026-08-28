@@ -60,3 +60,22 @@ I enjoy working at the intersection of **data, code, and decision-making**, help
 
 ⭐ *Thanks for visiting my GitHub!  
 Feel free to explore my repositories, and let’s connect if you’re interested in collaboration or data-driven projects.*
+
+---
+
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/github-snake-dark.svg"
+  />
+
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/github-snake.svg"
+  />
+
+  <img
+    alt="GitHub Contribution Snake"
+    src="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/github-snake.svg"
+  />
+</picture>
