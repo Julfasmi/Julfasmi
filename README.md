@@ -65,6 +65,20 @@ Feel free to explore my repositories, and let’s connect if you’re interested
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/snake.svg" alt="GitHub Contribution Snake">
+## 🐍 Contribution Snake
+
+<img
+  src="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/snake.svg"
+  alt="GitHub Contribution Snake"
+/>
+
+<br>
+
+## 👾 Contribution Pac-Man
+
+<img
+  src="https://raw.githubusercontent.com/Julfasmi/julfasmi/output/pacman-contribution-graph.svg"
+  alt="Pac-Man Contribution Graph"
+/>
 
 </div>
