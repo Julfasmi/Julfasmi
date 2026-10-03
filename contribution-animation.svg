@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 900 300"
+     width="900"
+     height="300">
+
+  <rect width="900" height="300" fill="#0d1117"/>
+
+  <text x="450" y="48"
+        text-anchor="middle"
+        fill="#8b949e"
+        font-family="Arial, sans-serif"
+        font-size="18">
+    GOOD NIGHT
+  </text>
+
+  <g transform="translate(450 165)">
+
+    <!-- tail -->
+    <path d="M80 55
+             C150 90 170 20 125 -5"
+          fill="none"
+          stroke="#c9d1d9"
+          stroke-width="12"
+          stroke-linecap="round"/>
+
+    <!-- body -->
+    <ellipse cx="0"
+             cy="45"
+             rx="105"
+             ry="58"
+             fill="#c9d1d9"/>
+
+    <!-- head -->
+    <path d="M-85 20
+             L-110 -45
+             L-55 -15
+             Q0 -55 55 -15
+             L110 -45
+             L85 20
+             Q80 80 0 80
+             Q-80 80 -85 20Z"
+          fill="#c9d1d9"/>
+
+    <!-- ears -->
+    <path d="M-105 -42 L-110 -80 L-70 -55Z"
+          fill="#c9d1d9"/>
+
+    <path d="M105 -42 L110 -80 L70 -55Z"
+          fill="#c9d1d9"/>
+
+    <!-- sleeping eyes -->
+    <path d="M-55 15 Q-40 25 -25 15"
+          fill="none"
+          stroke="#0d1117"
+          stroke-width="5"
+          stroke-linecap="round"/>
+
+    <path d="M25 15 Q40 25 55 15"
+          fill="none"
+          stroke="#0d1117"
+          stroke-width="5"
+          stroke-linecap="round"/>
+
+    <!-- nose -->
+    <path d="M-7 32 L7 32 L0 40Z"
+          fill="#0d1117"/>
+
+    <!-- breathing -->
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      values="450 165;450 160;450 165"
+      dur="4s"
+      repeatCount="indefinite"/>
+
+  </g>
+
+  <!-- Zzz -->
+  <g fill="#58a6ff"
+     font-family="Arial, sans-serif"
+     font-weight="bold">
+
+    <text x="570" y="110" font-size="22">
+      Z
+      <animate attributeName="opacity"
+               values="0;1;0"
+               dur="3s"
+               repeatCount="indefinite"/>
+    </text>
+
+    <text x="610" y="75" font-size="28">
+      Z
+      <animate attributeName="opacity"
+               values="0;1;0"
+               dur="3s"
+               begin="1s"
+               repeatCount="indefinite"/>
+    </text>
+
+    <text x="660" y="35" font-size="34">
+      Z
+      <animate attributeName="opacity"
+               values="0;1;0"
+               dur="3s"
+               begin="2s"
+               repeatCount="indefinite"/>
+    </text>
+
+  </g>
+
+</svg>
